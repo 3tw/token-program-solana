@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased leading-normal text-black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  .measure {
+    --measure: theme(measure.base);
+  }
+  .measure-sm {
+    --measure: theme(measure.sm);
+  }
+  .measure-md {
+    --measure: theme(measure.md);
+  }
+  .measure-lg {
+    --measure: theme(measure.lg);
+  }
+}
+
+@import 'fonts';
