@@ -23,16 +23,6 @@ export const useWorkspaceStore = defineStore('workspace', () => {
   // @ts-ignore
   const program = computed(() => new Program(idl, programID, provider.value))
 
-  async function checkWalletConnection(){
-    try {
-      const walletData = useWallet()
-      await walletData.connect()
-      return walletData.connected.value
-    } catch (error) {
-      console.log(error)
-      return false
-    }    
-  }
   const walletIsConnected = computed(() => {
     const walletData = useWallet()
     return walletData.connected.value
@@ -44,6 +34,5 @@ export const useWorkspaceStore = defineStore('workspace', () => {
     provider,
     program,
     walletIsConnected,
-    checkWalletConnection,
   }
 })
