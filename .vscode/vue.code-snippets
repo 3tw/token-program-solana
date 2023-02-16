@@ -1,0 +1,36 @@
+{
+  "vcom": {
+    "scope": "vue",
+    "prefix": [
+      "vcom"
+    ],
+    "body": [
+      "<script lang=\"ts\" setup>",
+      " ",
+      "</script>",
+      "",
+      "<template>",
+      "   ",
+      "</template>",
+      "",
+      "<style lang=\"scss\" scoped>",
+      "",
+      "</style>",
+      ""
+    ]
+  },
+  "vprops": {
+    "scope": "javascript,typescript,vue",
+    "prefix": [
+      "vprops"
+    ],
+    "body": [
+      "interface Props {",
+      "myProp: any",
+      "}",
+      "const props = withDefaults(defineProps<Props>(), {",
+      "myProp: ''",
+      "})"
+    ]
+  },
+}

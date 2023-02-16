@@ -3,11 +3,26 @@
   import { router } from '~/router'
 
   const { walletIsConnected } = useWorkspace()
+  const { api } = useApi()
+  const students = ref()
+
+  async function getStudentList() {
+    try {
+      const data = await api.students.getList()
+      students.value = data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   watchEffect(() => {
     if (!walletIsConnected.value) {
       router.push({ name: 'index' })
     }
+  })
+
+  onMounted(() => {
+    getStudentList()
   })
 </script>
 
@@ -21,11 +36,20 @@
     <div class="flex flex-col space-y-10">
       <div>
         <h2 class="text-lg font-medium mb-4">Introduce Yourself</h2>
-        <StudentsForm />
+        <StudentsForm @student-added="getStudentList()" />
       </div>
 
       <div>
         <h2 class="text-lg font-medium mb-4">Meet the Students!</h2>
+        <div class="flex flex-col gap-2">
+          <div
+            v-for="student in students"
+            class="flex flex-col border-b border-gray-200 pb-2"
+          >
+            <p>{{ student.name }}</p>
+            <p>{{ student.message }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </UiWrapper>

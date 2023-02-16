@@ -1,15 +1,27 @@
 <script lang="ts" setup>
   import { useWallet } from 'solana-wallets-vue'
   import { Student } from './student'
-  
+
+  const emit = defineEmits<{
+    (e: 'student-added'): void
+  }>()
+
   const { api } = useApi()
   const { publicKey } = useWallet()
-  
+
   const student = reactive({ name: '', message: '' })
 
-  function submit() {
+  async function submit() {
     if (!publicKey.value) return
-    api.message.create(new Student(student.name, student.message), publicKey.value)
+    try {
+      await api.students.create(
+        new Student(student.name, student.message),
+        publicKey.value,
+      )
+      emit('student-added')
+    } catch (error) {
+      console.log(error)
+    }
   }
 </script>
 

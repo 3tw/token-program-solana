@@ -7,16 +7,17 @@ import {
 import { useWallet } from 'solana-wallets-vue'
 import { Student } from '~/components/students/student'
 
+/* Common */
 const { STUDENT_INTRO_PROGRAM_ID } = useConstants()
 const { connection } = useWorkspace()
 
 async function create(student: Student, userPubkey: PublicKey) {
   if (!userPubkey) return
 
-  const programId = new PublicKey(STUDENT_INTRO_PROGRAM_ID)
   const buffer = student.serialize()
   const transaction = new Transaction()
-  
+  const programId = new PublicKey(STUDENT_INTRO_PROGRAM_ID)
+
   // Find pda; make sure to use the correct seeds
   const [pda] = await PublicKey.findProgramAddressSync(
     [userPubkey.toBuffer()],
@@ -52,11 +53,22 @@ async function create(student: Student, userPubkey: PublicKey) {
     console.log(
       `Transaction submitted: https://explorer.solana.com/tx/${txId}?cluster=devnet`,
     )
-  } catch (e) {
-    alert(JSON.stringify(e))
+  } catch (error) {
+    console.log('Transaction failed: ', JSON.stringify(error))
   }
 }
 
-export const message = {
+async function getList() {
+  const programId = new PublicKey(STUDENT_INTRO_PROGRAM_ID)
+  try {
+    const result = await connection.getProgramAccounts(programId)
+    return result.map((account) => Student.deserialize(account.account.data))
+  } catch (error) {
+    console.log('Get program accounts error: ', error)
+  }
+}
+
+export default {
   create,
+  getList,
 }

@@ -1,8 +1,8 @@
-import { message } from '~/api/message'
+import students from '~/api/students'
 
 export function useApi() {
   const api = {
-    message,
+    students,
   }
   return { api }
 }
