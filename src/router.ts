@@ -10,13 +10,15 @@ const router = createRouter({
   routes,
 })
 
-async function checkWalletAndRedirect(to: RouteLocationNormalized) {
-  const workspaceStore = useWorkspaceStore()
+function checkWalletAndRedirect(to: RouteLocationNormalized) {
+  const { walletIsConnected } = useWorkspace()
+
   try {
-    if (workspaceStore.walletIsConnected && to.name === 'index') {
+    if (walletIsConnected.value && to.name === 'index') {
+      console.log('go to dash')
       return { name: 'dashboard' }
     }
-    if (!workspaceStore.walletIsConnected && to.name !== 'index') {
+    if (!walletIsConnected.value && to.name !== 'index') {
       return { name: 'index' }
     }
   } catch (error) {

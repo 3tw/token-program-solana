@@ -1,8 +1,8 @@
-import { messages } from '~/api/messages'
+import { message } from '~/api/message'
 
 export function useApi() {
   const api = {
-    messages,
+    message,
   }
   return { api }
 }

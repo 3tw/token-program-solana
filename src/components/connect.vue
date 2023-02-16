@@ -1,10 +1,10 @@
 <script lang="ts" setup>
   import { WalletMultiButton } from 'solana-wallets-vue'
   import { router } from '~/router'
-  const workspaceStore = useWorkspaceStore()
+  const { walletIsConnected } = useWorkspace()
 
   watchEffect(() => {
-    if (workspaceStore.walletIsConnected) {
+    if (walletIsConnected.value) {
       router.push({ name: 'dashboard' })
     }
   })
@@ -32,7 +32,7 @@
         </div>
       </div>
       <img
-        class="hidden h-full w-full object-cover lg:block lg:col-span-3 "
+        class="hidden h-full w-full object-cover lg:block lg:col-span-3"
         src="home-page.jpg"
         alt=""
       />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   useHead({
-    title: 'Anchor+Vue3',
-    meta: [{ name: 'description', content: 'Vue3 template for Anchor' }],
+    title: 'Student introductions',
+    meta: [{ name: 'description', content: 'Exercise on client interaction with the Solana Network' }],
     link: [
       {
         rel: 'icon',

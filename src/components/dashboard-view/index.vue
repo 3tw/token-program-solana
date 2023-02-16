@@ -2,33 +2,31 @@
   import { WalletMultiButton } from 'solana-wallets-vue'
   import { router } from '~/router'
 
-  const workspaceStore = useWorkspaceStore()
+  const { walletIsConnected } = useWorkspace()
 
   watchEffect(() => {
-    if (!workspaceStore.walletIsConnected) {
+    if (!walletIsConnected.value) {
       router.push({ name: 'index' })
     }
   })
 </script>
 
 <template>
-  <UiWrapper
-    class="min-h-screen flex flex-col items-start justify-center gap-10"
-  >
-    <img class="h-12 w-auto" src="solanaLogoMark.png" alt="Your Company" />
-    <div class="grid lg:grid-cols-2 w-full gap-y-8">
-      <div class="flex flex-col gap-8 mx-auto w-full">
-        <WalletMultiButton />
+  <UiWrapper class="min-h-screen flex flex-col gap-10">
+    <div class="flex justify-between items-center">
+      <h1 class="text-3xl font-medium text-black">Student introductions</h1>
+      <WalletMultiButton />
+    </div>
 
-        <div class="flex flex-col">
-          <span class="font-medium"> Your public key: </span>
-          <p class="overflow-ellipsis overflow-hidden whitespace-nowrap">
-            {{ workspaceStore.wallet?.publicKey.toBase58() }}
-          </p>
-        </div>
+    <div class="flex flex-col space-y-10">
+      <div>
+        <h2 class="text-lg font-medium mb-4">Introduce Yourself</h2>
+        <StudentsForm />
       </div>
 
-      <DashboardViewMessages class="flex items-start mx-auto w-full" />
+      <div>
+        <h2 class="text-lg font-medium mb-4">Meet the Students!</h2>
+      </div>
     </div>
   </UiWrapper>
 </template>
