@@ -1,32 +1,23 @@
+## Solana Development Course Exercise - Vue3 App
+This is an exercise from the [Solana development course](https://soldev.app/course). Unlike the course code, I finished the exercises in Vue3.
+Key features of the app include connecting and interacting with the user's wallet, making calls to Solana program, fetching accounts, sorting them, and implementing search with pagination.
 
-This is a [Vue3](https://github.com/vuejs/core) template for client interaction with Solana network. It can be used on its own or inside [Anchor](https://github.com/coral-xyz/anchor) framework.
+## Notes
+One of the shortcomings of this app is that it relies on a third-party wallet provider ([solana-wallets-vue](https://github.com/lorisleiva/solana-wallets-vue)) to connect to a user's wallet.
+The connection to the wallet is returned synchronously, preventing smooth routing UX. When the app is mounted we cannot wait this information in an asynchronous way, which may result in a flash of content.
 
-It comes with [Pinia](https://pinia.vuejs.org/) store that implements [solana-wallets-vue](https://github.com/lorisleiva/solana-wallets-vue) and creates a connection with Solana [devnet cluster](https://docs.solana.com/clusters) out of the box. 
-The template also comes with a demo program (test_program) that allows you to write and update messages. Use it as an example of how your frontend code can communicate with a deployed Solana program. (Please note that this demo program may not work in the future and is intended for demonstration purposes only.)
-
-
-## Features
-- [Solana wallets for Vue](https://github.com/lorisleiva/solana-wallets-vue)
-- [Alchemy](https://docs.alchemy.com/)
-- [Vue3](https://vuejs.org/)
-- [Typescript](https://vuejs.org/guide/typescript/overview.html)
-- [Vite](https://github.com/vitejs/vite)
-- [Pinia State Management](https://pinia.vuejs.org/)
-- [File based routing](https://github.com/hannoeru/vite-plugin-pages)
-- [Auto imported components ](https://github.com/antfu/unplugin-vue-components)
-- [TailwindCSS](https://tailwindcss.com/)
+### Goals
+I would like to take a closer look at the [solana-wallets-vue](https://github.com/lorisleiva/solana-wallets-vue) to find out if we can find out if the wallet is  `connected` asynchronously.
 
 ## Setup
-You can use this template on its own or inside Anchor application. Simply copy this repository and run
+Install dependencies by running and starting the development server
 
 ```bash
 npm install && npm run dev
 ```
 
-If you are using it inside Anchor, paste this repo inside `/app` directory and you are ready to go.
-
 ### Alchemy
-If you you'are using [Alchemy](https://docs.alchemy.com/) to test your apps, you can simply copy `.env.example` file and rename it to `.env`
+If you you're using [Alchemy](https://docs.alchemy.com/) to test your apps, you can simply copy the `.env.example` file and rename it to `.env`
 
 ```bash
 cp .env.example .env
