@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-  import { WalletMultiButton } from 'solana-wallets-vue'
+  import { WalletMultiButton, useWallet } from 'solana-wallets-vue'
   import { router } from '~/router'
   import { Student } from '../students/student'
 
-  const { walletIsConnected } = useWorkspace()
   const { api } = useApi()
+  const { publicKey } = useWallet()
+  const { walletIsConnected } = useWorkspace()
   const defaultStudent: Student[] = []
   const students = ref(defaultStudent)
 
@@ -13,6 +14,7 @@
   const studentsTotal = ref(0)
   const search = ref('')
   const loadingStudents = ref(false)
+  const myStudentAccount = ref<Student | undefined | null>(undefined)
 
   async function getStudentList() {
     try {
@@ -36,6 +38,14 @@
     getStudentList()
   }
 
+  async function getMyAccount() {
+    if (!publicKey.value) return
+    try {
+      const student = await api.students.getAccount(publicKey.value)
+      myStudentAccount.value = student ? student : null
+    } catch (error) {}
+  }
+
   // Got tired of reading "fuck" all the time, so here is a little regex to fix that
   function chillTheFckDown(text: string) {
     return text.replace(/\b(fuck)\b/gi, 'banana')
@@ -57,6 +67,7 @@
 
   onMounted(() => {
     getStudentList()
+    getMyAccount()
   })
 </script>
 
@@ -68,10 +79,20 @@
     </div>
 
     <div class="flex flex-col space-y-10">
-      <div>
+      <div v-if="myStudentAccount">
+        <h2 class="text-lg font-medium mb-4">Your data</h2>
+        <h3 class="text-base text-black font-medium">
+          {{ myStudentAccount.name }}
+        </h3>
+        <p>{{ myStudentAccount.message }}</p>
+      </div>
+
+      <div v-else-if="myStudentAccount === null">
         <h2 class="text-lg font-medium mb-4">Introduce Yourself</h2>
         <StudentsForm @student-added="getStudentList()" />
       </div>
+
+      <div v-else><UiSpinner /></div>
 
       <div class="flex flex-col">
         <h2 class="text-lg font-medium">Meet the Students!</h2>

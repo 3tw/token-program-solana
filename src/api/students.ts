@@ -58,20 +58,15 @@ async function create(student: Student, userPubkey: PublicKey) {
   }
 }
 
-/**
- * This method returns all accounts, which is not optimal.
- * Instead we want to get only a certain amount of accounts with pagination.
- * The key to paging is to prefetch all the accounts without data.
- * */
-
-// async function getList() {
-//   try {
-//     const result = await connection.getProgramAccounts(programId)
-//     return result.map((account) => Student.deserialize(account.account.data))
-//   } catch (error) {
-//     console.log('Get program accounts error: ', error)
-//   }
-// }
+async function getAccount(userPubkey: PublicKey) {
+  const [pda] = await PublicKey.findProgramAddressSync(
+    [userPubkey.toBuffer()],
+    programId,
+  )
+  const result = await connection.getAccountInfo(pda)
+  if (!result?.data) return
+  return Student.deserialize(result?.data)
+}
 
 /**
  * Get accounts + names of the student to sort it - leave messages out to reduce payload.
@@ -155,5 +150,6 @@ async function getList(
 export default {
   create,
   getList,
+  getAccount,
   getAccounts,
 }
