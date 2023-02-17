@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import inject from '@rollup/plugin-inject';
+import inject from '@rollup/plugin-inject'
 import Pages from 'vite-plugin-pages'
 import path from 'path'
 import Vue from '@vitejs/plugin-vue'
@@ -18,17 +18,15 @@ export default defineConfig({
       // Node.js global to browser globalThis
       define: {
         global: 'globalThis',
-        "process.env.NODE_DEBUG": JSON.stringify("")
+        'process.env.NODE_DEBUG': JSON.stringify(''),
       },
     },
-    include: [
-      'buffer',
-    ]
+    include: ['buffer'],
   },
 
   plugins: [
     inject({
-      Buffer: ['buffer', 'Buffer']
+      Buffer: ['buffer', 'Buffer'],
     }),
     Vue({
       include: [/\.vue$/, /\.md$/],

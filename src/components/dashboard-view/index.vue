@@ -1,20 +1,54 @@
 <script lang="ts" setup>
   import { WalletMultiButton } from 'solana-wallets-vue'
   import { router } from '~/router'
+  import { Student } from '../students/student'
 
   const { walletIsConnected } = useWorkspace()
   const { api } = useApi()
-  const students = ref()
+  const defaultStudent: Student[] = []
+  const students = ref(defaultStudent)
+
+  const PAGE_SIZE = 10
+  const page = ref(0)
+  const studentsTotal = ref(0)
+  const search = ref('')
+  const loadingStudents = ref(false)
 
   async function getStudentList() {
     try {
-      const data = await api.students.getList()
-      students.value = data
+      loadingStudents.value = true
+      const accountsPublicKeys = await api.students.getAccounts(search.value)
+      studentsTotal.value = accountsPublicKeys.length
+      students.value = await api.students.getList(
+        accountsPublicKeys,
+        page.value,
+        PAGE_SIZE,
+      )
     } catch (error) {
       console.log(error)
+    } finally {
+      loadingStudents.value = false
     }
   }
+  function updateStudentList(newPage = page.value) {
+    console.log(newPage)
+    page.value = newPage
+    getStudentList()
+  }
 
+  // Got tired of reading "fuck" all the time, so here is a little regex to fix that
+  function chillTheFckDown(text: string) {
+    return text.replace(/\b(fuck)\b/gi, 'banana')
+  }
+
+  // Debounce search input, to send fewer requests
+  const debounceTimeout = ref()
+  watch(search, (newValue, oldValue) => {
+    clearTimeout(debounceTimeout.value)
+    debounceTimeout.value = setTimeout(() => {
+      updateStudentList()
+    }, 500)
+  })
   watchEffect(() => {
     if (!walletIsConnected.value) {
       router.push({ name: 'index' })
@@ -39,18 +73,35 @@
         <StudentsForm @student-added="getStudentList()" />
       </div>
 
-      <div>
-        <h2 class="text-lg font-medium mb-4">Meet the Students!</h2>
-        <div class="flex flex-col gap-2">
+      <div class="flex flex-col">
+        <h2 class="text-lg font-medium">Meet the Students!</h2>
+        <UiInputText
+          v-model="search"
+          :is-loading="loadingStudents"
+          label="Search by name"
+          class="mt-4"
+        />
+
+        <div class="flex flex-col gap-2 mt-8">
           <div
             v-for="student in students"
             class="flex flex-col border-b border-gray-200 pb-2"
           >
-            <p>{{ student.name }}</p>
-            <p>{{ student.message }}</p>
+            <h3 class="text-base text-black font-medium">
+              {{ chillTheFckDown(student.name) }}
+            </h3>
+            <p>{{ chillTheFckDown(student.message) }}</p>
           </div>
         </div>
       </div>
+
+      <UiPagination
+        v-if="students.length"
+        :page="page"
+        :pageSize="PAGE_SIZE"
+        :totalItems="studentsTotal"
+        @update-page="updateStudentList($event)"
+      />
     </div>
   </UiWrapper>
 </template>

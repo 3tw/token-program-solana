@@ -5,20 +5,10 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": [
-    "braintree",
-    "chargebee",
-    "clonedeep",
     "composables",
     "esbuild",
-    "headlessui",
-    "heroicons",
-    "intlify",
-    "locize",
-    "Loftware",
-    "Msal",
     "pinia",
     "tailwindcss",
-    "toastification",
     "unplugin",
     "Vite",
     "vitejs",
@@ -26,6 +16,8 @@
     "vitest",
     "vuelidate",
     "vueuse",
+    "solana",
+    "borsh"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[javascript]": {

@@ -18,7 +18,7 @@
           <div>
             <img
               class="h-12 w-auto"
-              src="solanaLogoMark.png"
+              src="/solanaLogoMark.png"
               alt="Your Company"
             />
           </div>
@@ -33,7 +33,7 @@
       </div>
       <img
         class="hidden h-full w-full object-cover lg:block lg:col-span-3"
-        src="home-page.jpg"
+        src="/home-page.jpg"
         alt=""
       />
     </div>
