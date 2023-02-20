@@ -17,7 +17,9 @@
     "vuelidate",
     "vueuse",
     "solana",
-    "borsh"
+    "borsh",
+    "lamports",
+    "keypair"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[javascript]": {

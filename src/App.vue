@@ -1,7 +1,12 @@
 <script setup lang="ts">
   useHead({
-    title: 'Student introductions',
-    meta: [{ name: 'description', content: 'Exercise on client interaction with the Solana Network' }],
+    title: 'Token program',
+    meta: [
+      {
+        name: 'description',
+        content: 'Exercise on client interaction with the Solana Network',
+      },
+    ],
     link: [
       {
         rel: 'icon',

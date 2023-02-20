@@ -1,16 +1,16 @@
 <script lang="ts" setup>
   interface Props {
     label?: string
-    modelValue?: string
+    modelValue?: number
     isLoading?: boolean
   }
   const props = withDefaults(defineProps<Props>(), {
     label: undefined,
-    modelValue: '',
+    modelValue: undefined,
     isLoading: false,
   })
   const emit = defineEmits<{
-    (e: 'update:modelValue', value: string): void
+    (e: 'update:modelValue', value: number | undefined): void
   }>()
 
   const value = computed({
@@ -29,7 +29,7 @@
     <div class="relative w-full max-w-xs">
       <input
         v-model="value"
-        type="text"
+        type="number"
         class="w-full rounded-md border-gray-400 px-3 py-2 bg-white dark:bg-slate-800 focus:ring-1 focus:ring-indigo-600 focus:shadow-none"
       />
       <div

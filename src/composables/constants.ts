@@ -5,13 +5,12 @@ export function useConstants() {
     import.meta.env.VITE_ALCHEMY_RPC_URL || clusterApiUrl('devnet')
   const commitmentLevel: Commitment = 'processed'
   const network = 'http://localhost:3333/'
-  const STUDENT_INTRO_PROGRAM_ID =
-    'HdE95RSVsdb315jfJtaykXhXY478h53X6okDupVfY9yf'
+  const LAMPORTS = 1000000000
 
   return {
     commitmentLevel,
     endpoint,
     network,
-    STUDENT_INTRO_PROGRAM_ID,
+    LAMPORTS,
   }
 }

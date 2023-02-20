@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-  import { WalletMultiButton } from 'solana-wallets-vue'
+  import { useWallet, WalletMultiButton } from 'solana-wallets-vue'
   import { router } from '~/router'
-  const { walletIsConnected } = useWorkspace()
+  const { connected } = useWallet()
 
   watchEffect(() => {
-    if (walletIsConnected.value) {
+    if (connected.value) {
       router.push({ name: 'dashboard' })
     }
   })

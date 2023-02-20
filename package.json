@@ -11,10 +11,11 @@
   "dependencies": {
     "@heroicons/vue": "^2.0.14",
     "@project-serum/borsh": "^0.2.5",
+    "@solana/spl-token": "^0.3.7",
     "@solana/wallet-adapter-wallets": "^0.19.11",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "18.11.18",
-    "@vueuse/core": "^9.12.0",
+    "@vueuse/core": "^9.13.0",
     "@vueuse/head": "^1.0.24",
     "bs58": "^5.0.0",
     "ky": "^0.33.2",

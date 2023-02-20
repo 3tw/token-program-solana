@@ -1,3 +1,4 @@
+import { useWallet } from 'solana-wallets-vue'
 import {
   createRouter,
   createWebHistory,
@@ -10,15 +11,17 @@ const router = createRouter({
   routes,
 })
 
-function checkWalletAndRedirect(to: RouteLocationNormalized) {
-  const { walletIsConnected } = useWorkspace()
+async function checkWalletAndRedirect(to: RouteLocationNormalized) {
+  // const { checkIfWalletIsConnected } = useWorkspace()
+  const { connected } = useWallet()
 
   try {
-    if (walletIsConnected.value && to.name === 'index') {
-      console.log('go to dash')
+    // const walletIsConnected = await checkIfWalletIsConnected()
+    const walletIsConnected = connected
+    if (walletIsConnected && to.name === 'index') {
       return { name: 'dashboard' }
     }
-    if (!walletIsConnected.value && to.name !== 'index') {
+    if (!walletIsConnected && to.name !== 'index') {
       return { name: 'index' }
     }
   } catch (error) {

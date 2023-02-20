@@ -1,8 +1,8 @@
-import students from '~/api/students'
+import tokens from '~/api/tokens'
 
 export function useApi() {
   const api = {
-    students,
+    tokens,
   }
   return { api }
 }
