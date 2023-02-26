@@ -57,18 +57,24 @@ async function createAssociatedTokenAccount(
       userPubkey,
       false,
     )
-    const transaction = new Transaction().add(
-      token.createAssociatedTokenAccountInstruction(
-        userPubkey,
-        associatedTokenAddress,
-        userPubkey,
-        mintPubkey,
-      ),
-    )
 
-    const { sendTransaction } = useWallet()
-    const txId = await sendTransaction(transaction, connection)
-    logTransaction(txId)
+    let account = await connection.getAccountInfo(associatedTokenAddress)
+
+    if (account == null) {
+      const transaction = new Transaction().add(
+        token.createAssociatedTokenAccountInstruction(
+          userPubkey,
+          associatedTokenAddress,
+          userPubkey,
+          mintPubkey,
+        ),
+      )
+
+      const { sendTransaction } = useWallet()
+      const txId = await sendTransaction(transaction, connection)
+      logTransaction(txId)
+    }
+
     return associatedTokenAddress
   } catch (error) {
     console.log(`Create Associated Account error: ${error}`)

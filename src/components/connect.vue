@@ -24,7 +24,9 @@
           </div>
 
           <div class="flex flex-col space-y-6 mt-8">
-            <h2 class="mt-6 text-3xl font-medium tracking-tight text-gray-900">
+            <h2
+              class="mt-6 text-3xl font-medium tracking-tight text-gray-900 dark:text-white"
+            >
               Connect your wallet
             </h2>
             <WalletMultiButton />

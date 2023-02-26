@@ -1,8 +1,10 @@
 import { useWallet } from 'solana-wallets-vue'
-import { Connection } from '@solana/web3.js'
+import { Connection, clusterApiUrl, Commitment } from '@solana/web3.js'
 
 export function useWorkspace() {
-  const { endpoint, commitmentLevel } = useConstants()
+  const endpoint =
+    import.meta.env.VITE_ALCHEMY_RPC_URL || clusterApiUrl('devnet')
+  const commitmentLevel: Commitment = 'processed'
   const connection = new Connection(endpoint, commitmentLevel)
 
   async function checkIfWalletIsConnected() {

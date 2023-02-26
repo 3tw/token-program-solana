@@ -3,10 +3,10 @@
   import { WalletMultiButton, useWallet } from 'solana-wallets-vue'
   import { useStorage } from '@vueuse/core'
   import { router } from '~/router'
+  import { LAMPORTS } from '~/constants'
 
   const { connection } = useWorkspace()
   const { publicKey, connected } = useWallet()
-  const { LAMPORTS } = useConstants()
 
   // Ui
   const userAccountBalance = ref<number | undefined>(undefined)
@@ -83,7 +83,10 @@
 
       <TokensFormCreateMint />
       <TokensFormCreateAccount />
-      <TokensFormMintTokens />
+      <TokensFormMintTokens
+        :mint="mintPubkey"
+        :recipient="associatedTokenAccountPubkey"
+      />
     </div>
   </UiWrapper>
 </template>

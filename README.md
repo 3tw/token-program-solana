@@ -1,6 +1,6 @@
 ## Solana Development Course Exercise - Vue3 App
 This is an exercise from the [Solana development course](https://soldev.app/course).
-Unlike the course code, this is a Vue3 project.
+I didn't use React dependencies as suggested in the course. Instead, I decided to make a Vue3 project.
 
 ## Notes
 
