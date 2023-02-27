@@ -1,11 +1,8 @@
 ## Solana Development Course Exercise - Vue3 App
 This is an exercise from the [Solana development course](https://soldev.app/course).
-I didn't use React dependencies as suggested in the course. Instead, I decided to make a Vue3 project. After struggling to make Vite comply with several cruical dependecies for this project, I decided to remake it in Angular.
+I didn't use React dependencies as suggested in the course and tried to make it a Vue3 + Vite project. After struggling with Vite and several cruical dependecies for this project, I decided to remake it in Angular.
 
 ## Notes
-
-### Goals
-
 
 ## Setup
 Install dependencies by running and starting the development server
