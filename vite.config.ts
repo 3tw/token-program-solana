@@ -3,6 +3,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import inject from '@rollup/plugin-inject'
 import Pages from 'vite-plugin-pages'
+import Layouts from 'vite-plugin-vue-layouts'
 import path from 'path'
 import Vue from '@vitejs/plugin-vue'
 
@@ -18,7 +19,6 @@ export default defineConfig({
       // Node.js global to browser globalThis
       define: {
         global: 'globalThis',
-        'process.env.NODE_DEBUG': JSON.stringify(''),
       },
     },
     include: ['buffer'],
@@ -37,6 +37,8 @@ export default defineConfig({
       extensions: ['vue', 'md'],
       routeStyle: 'nuxt',
     }),
+    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+    Layouts({ defaultLayout: 'default' }),
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: ['vue', 'vue-router', 'vue/macros', '@vueuse/head'],

@@ -14,12 +14,9 @@
 </script>
 
 <template>
-  <button
-    class="max-w-xs bg-indigo-600 text-white rounded-md w-full px-6 py-3"
-    @click="createMint()"
-  >
+  <UiButton @click="createMint()">
     {{ mintPubkey ? 'Create new Mint' : 'Create Mint' }}
-  </button>
+  </UiButton>
 </template>
 
 <style lang="scss" scoped></style>

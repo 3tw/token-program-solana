@@ -26,7 +26,7 @@
 <template>
   <label class="flex flex-col text-sm">
     {{ props.label }}
-    <div class="relative w-full max-w-xs">
+    <div class="relative w-full">
       <input
         v-model="value"
         type="number"

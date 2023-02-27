@@ -4,8 +4,10 @@ import {
   createWebHistory,
   RouteLocationNormalized,
 } from 'vue-router'
-import routes from '~pages'
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from 'virtual:generated-pages'
 
+const routes = setupLayouts(generatedRoutes)
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -19,7 +21,7 @@ async function checkWalletAndRedirect(to: RouteLocationNormalized) {
     // const walletIsConnected = await checkIfWalletIsConnected()
     const walletIsConnected = connected
     if (walletIsConnected && to.name === 'index') {
-      return { name: 'dashboard' }
+      return { name: 'mint-tokens' }
     }
     if (!walletIsConnected && to.name !== 'index') {
       return { name: 'index' }

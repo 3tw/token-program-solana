@@ -34,16 +34,11 @@
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 max-w-xs">
+  <div class="flex flex-col gap-2">
     <UiInputText v-model="tokenMint" label="Token Mint" />
     <UiInputText v-model="recipient" label="Recipient" />
     <UiInputNumber v-model="amount" label="Amount of Tokens to Mint" />
-    <button
-      class="bg-indigo-600 text-white rounded-md w-full px-6 py-3"
-      @click="mintTokens()"
-    >
-      Mint Tokens
-    </button>
+    <UiButton @click="mintTokens()"> Mint Tokens </UiButton>
   </div>
 </template>
 

@@ -5,7 +5,7 @@
 
   watchEffect(() => {
     if (connected.value) {
-      router.push({ name: 'dashboard' })
+      router.push({ name: 'mint-tokens' })
     }
   })
 </script>

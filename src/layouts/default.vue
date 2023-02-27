@@ -1,3 +1,3 @@
 <template>
-  <DashboardView />
+  <RouterView />
 </template>

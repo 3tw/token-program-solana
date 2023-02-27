@@ -56,37 +56,31 @@
 </script>
 
 <template>
-  <UiWrapper class="min-h-screen flex flex-col gap-10">
+  <UiWrapper class="min-h-screen flex flex-col gap-10 dark:text-white">
     <div class="flex justify-between items-center">
       <h1 class="text-3xl font-medium dark:text-white">Token program</h1>
       <WalletMultiButton />
     </div>
 
-    <div class="flex flex-col space-y-10 dark:text-white">
-      <div class="flex flex-col gap-2">
-        <div
-          v-if="connected && userAccountBalance !== undefined"
-          class="flex gap-2"
-        >
-          <span class="text-base font-medium">SOL Balance:</span>
-          <span>{{ userAccountBalance / LAMPORTS }}</span>
-        </div>
-        <div v-if="mintPubkey" class="flex flex-col">
-          <span class="font-medium">Current Mint Public Key:</span>
-          <span>{{ mintPubkey }}</span>
-        </div>
-        <div v-if="associatedTokenAccountPubkey" class="flex flex-col">
-          <span class="font-medium">Associated Token Account:</span>
-          <span>{{ associatedTokenAccountPubkey }}</span>
-        </div>
+    <div class="flex flex-col gap-2">
+      <div
+        v-if="connected && userAccountBalance !== undefined"
+        class="flex gap-2"
+      >
+        <span class="text-base font-medium">SOL Balance:</span>
+        <span>{{ userAccountBalance / LAMPORTS }}</span>
       </div>
-
-      <TokensFormCreateMint />
-      <TokensFormCreateAccount />
-      <TokensFormMintTokens
-        :mint="mintPubkey"
-        :recipient="associatedTokenAccountPubkey"
-      />
+      <div v-if="mintPubkey" class="flex flex-col">
+        <span class="font-medium">Current Mint Public Key:</span>
+        <span>{{ mintPubkey }}</span>
+      </div>
+      <div v-if="associatedTokenAccountPubkey" class="flex flex-col">
+        <span class="font-medium">Associated Token Account:</span>
+        <span>{{ associatedTokenAccountPubkey }}</span>
+      </div>
     </div>
+
+    <UiTabs />
+    <RouterView />
   </UiWrapper>
 </template>
